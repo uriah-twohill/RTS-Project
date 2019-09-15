@@ -42,22 +42,22 @@ public class ElfAnimationTestScript : MonoBehaviour
             anim.SetInteger("Transition", 4);
         }
         //Airborne
-        if (Input.GetKeyDown("up"))
+        if (Input.GetKeyDown("4"))
         {
             anim.SetInteger("Transition", 5);
         }
         //Airborne Damage
-        if (Input.GetKeyDown("up") && Input.GetKeyDown("d"))
+        if (Input.GetKeyDown("5"))
         {
             anim.SetInteger("Transition", 6);
         }
         //Airborne Down
-        if (Input.GetKeyDown("up") && Input.GetKeyDown("down"))
+        if (Input.GetKeyDown("6"))
         {
             anim.SetInteger("Transition", 7);
         }
         //Airborne Splat
-        if (Input.GetKeyDown("up") && Input.GetKeyDown("s"))
+        if (Input.GetKeyDown("7"))
         {
             anim.SetInteger("Transition", 8);
         }
@@ -77,7 +77,7 @@ public class ElfAnimationTestScript : MonoBehaviour
             anim.SetInteger("Transition", 11);
         }
         //Attatch
-        if (Input.GetKeyDown("a"))
+        if (Input.GetKeyDown("left"))
         {
             anim.SetInteger("Transition", 12);
         }
@@ -97,7 +97,7 @@ public class ElfAnimationTestScript : MonoBehaviour
             anim.SetInteger("Transition", 15);
         }
         //Matinee Spawn2
-        if (Input.GetKeyDown("z"))
+        if (Input.GetKeyDown("g"))
         {
             anim.SetInteger("Transition", 16);
         //Pose
