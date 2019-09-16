@@ -58,7 +58,6 @@ public class PlayerController : MonoBehaviour
             {
                 agent.SetDestination(hit.point);
             }
-
         }
         ExplosionAttack();
     }
