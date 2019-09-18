@@ -10,5 +10,6 @@ public class UnitStats : ScriptableObject
     public float attackSpeed;
     public float attackDamage;
     public float health;
+    public float lineOfSight;
 
 }

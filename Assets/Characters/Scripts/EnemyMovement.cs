@@ -14,13 +14,14 @@ public class EnemyMovement : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
+        agent.SetDestination(herosWalls.transform.position);
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        agent.SetDestination(herosWalls.transform.position);
+        
         if (agent.hasPath == false)
         {
             anim.SetInteger("Transition", 13);

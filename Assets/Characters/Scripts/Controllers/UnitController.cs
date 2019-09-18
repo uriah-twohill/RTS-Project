@@ -87,4 +87,12 @@ public class UnitController : MonoBehaviour
             yield return new WaitForSeconds(.05f);
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.tag == "idleTrigger")
+        {
+            anim.SetInteger("Transition", 13);
+        }
+    }
 }
