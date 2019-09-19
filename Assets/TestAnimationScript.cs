@@ -18,19 +18,19 @@ public class TestAnimationScript : MonoBehaviour {
 	void Update () {
         Time.timeScale = 1;
 
-        if (Input.GetKeyDown("1"))
+        if (Input.GetKey("right"))
         {
             anim.SetInteger("Transition", 1);
         }
-        if (Input.GetKeyDown("2"))
+        if (Input.GetKey("1"))
         {
             anim.SetInteger("Transition", 2);
         }
-        if (Input.GetKeyDown("3"))
+        if (Input.GetKey("2"))
         {
             anim.SetInteger("Transition", 3);
         }
-        if (Input.GetKeyDown("4"))
+        if (Input.GetKey("3"))
         {
             anim.SetInteger("Transition", 4);
         }

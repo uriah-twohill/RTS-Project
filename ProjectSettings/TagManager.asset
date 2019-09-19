@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - EnemyUnit
   - idleTrigger
+  - idleTriggerVillain
+  - Dessert
   layers:
   - Default
   - TransparentFX

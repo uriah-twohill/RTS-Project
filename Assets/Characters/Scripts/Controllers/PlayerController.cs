@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     
     private void ExplosionAttack()
     {
-        if (Input.GetKeyDown("e"))
+        if (Input.GetKey("e"))
         {
 
             anim.SetInteger("Transition", 3);

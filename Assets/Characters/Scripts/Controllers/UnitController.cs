@@ -12,6 +12,7 @@ public class UnitController : MonoBehaviour
     private float attackTimer;
 
     public UnitStats unitStats;
+    
 
     public void Start()
     {
@@ -65,6 +66,7 @@ public class UnitController : MonoBehaviour
         if (attackTimer >= unitStats.attackSpeed)
         {
             anim.SetInteger("Transition", 2);
+
             RTSGameManager.UnitTakeDamage(this, currentTarget.GetComponent<UnitController>());
             attackTimer = 0;
         }
@@ -81,7 +83,7 @@ public class UnitController : MonoBehaviour
         var renderer = GetComponent<Renderer>();
         for (int i = 0; i < 2; i++)
         {
-            renderer.material.color = Color.gray;
+            renderer.material.color = Color.red;
             yield return new WaitForSeconds(.05f);
             renderer.material.color = defaultColor;
             yield return new WaitForSeconds(.05f);

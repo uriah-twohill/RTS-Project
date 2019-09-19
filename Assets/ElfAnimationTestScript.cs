@@ -22,22 +22,22 @@ public class ElfAnimationTestScript : MonoBehaviour
     {
         Time.timeScale = 1;
         //Walk
-        if (Input.GetKeyDown("right"))
+        if (Input.GetKey("right"))
         {
             anim.SetInteger("Transition", 1);
         }
         //Attack 1
-        if (Input.GetKeyDown("1"))
+        if (Input.GetKey("1"))
         {
             anim.SetInteger("Transition", 2);
         }
         //Attack 2
-        if (Input.GetKeyDown("2"))
+        if (Input.GetKey("2"))
         {
             anim.SetInteger("Transition", 3);
         }
         //Attack 3
-        if (Input.GetKeyDown("3"))
+        if (Input.GetKey("3"))
         {
             anim.SetInteger("Transition", 4);
         }

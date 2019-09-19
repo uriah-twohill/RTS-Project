@@ -25,7 +25,7 @@ public class Health : MonoBehaviour
         public void ModifyHealth(int amount)
         {
         currentHealth += amount;
-
+        Debug.Log("healthdecreasingdafatfasdf"); 
         float currentHealthPct = (float)currentHealth / (float)maxHealth;
         OnHealthPctChanged(currentHealthPct);
         }

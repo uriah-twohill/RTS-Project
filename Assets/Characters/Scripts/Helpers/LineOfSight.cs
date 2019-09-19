@@ -5,35 +5,16 @@ using UnityEngine.AI;
 
 public class LineOfSight : MonoBehaviour
 {
-    private NavMeshAgent navAgent;
-    private Transform currentTarget;
+    NavMeshAgent agent;
     public UnitStats unitStats;
-    private Transform[] playerUnits;
+    private Animator anim;
 
-
-
-    public void Start()
-    { 
-        
-    }
-    public void Update()
+    private void Update()
     {
-
-        navAgent.destination = currentTarget.position;
-
-        var distance = (transform.position - playerUnits[0].position).magnitude;
-
-        if (distance <= unitStats.lineOfSight)
-        {
-            PursuePlayer();
-        }
+        anim = GetComponent<Animator>();
     }
 
-    public void PursuePlayer()
-    {
-
-    }
-
+   
 
 
 }
