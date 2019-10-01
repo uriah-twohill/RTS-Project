@@ -6,7 +6,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField]
-    private int maxHealth = 100;
+    public int maxHealth = 100;
     public int currentHealth;
 
     private Animator anim;
@@ -22,19 +22,16 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-        public void ModifyHealth(int amount)
-        {
-        currentHealth += amount;
-        Debug.Log("healthdecreasingdafatfasdf"); 
-        float currentHealthPct = (float)currentHealth / (float)maxHealth;
-        OnHealthPctChanged(currentHealthPct);
-        }
+    public void ModifyHealth(int amount)
+    {
+    currentHealth += amount;
+    Debug.Log("healthdecreasingdafatfasdf"); 
+    float currentHealthPct = (float)currentHealth / (float)maxHealth;
+    OnHealthPctChanged(currentHealthPct);
+    }
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            ModifyHealth(-10);
-
         Die();
     }
 
