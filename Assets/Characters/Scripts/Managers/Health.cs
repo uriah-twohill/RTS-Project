@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -33,6 +34,9 @@ public class Health : MonoBehaviour
     void Update()
     {
         Die();
+        if (Input.GetKeyDown("space"))
+            if (currentHealth >= 1)
+                ModifyHealth(-10);
     }
 
     public void Die()
@@ -40,6 +44,7 @@ public class Health : MonoBehaviour
         if (currentHealth <= 0)
         {
             anim.SetInteger("Transition", 9);
+            SceneManager.LoadScene("GameOver");
         }
     }
 }
