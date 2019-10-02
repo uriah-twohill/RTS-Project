@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
 
     bool isDragging = false;
     Vector3 mousePosition;
-    public Transform idleTrigger;
+    //public Transform idleTrigger;
 
 
     private void OnGUI()
@@ -78,7 +78,7 @@ public class PlayerManager : MonoBehaviour
                 Debug.Log(hit.transform);
                 if (hit.transform.CompareTag("Ground"))
                 {
-                    idleTrigger.transform.position = hit.point;
+                    //idleTrigger.transform.position = hit.point;
                     foreach(var selectableObj in selectedUnits)
                     {
                         selectableObj.MoveUnit(hit.point);

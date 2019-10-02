@@ -33,7 +33,7 @@ public class EnemyMovement : MonoBehaviour
         {
             anim.SetInteger("Transition", 1);
         }
-        if (agent.remainingDistance <= 0)
+        if (agent.remainingDistance <= agent.stoppingDistance)
         {
             findTarget();
         }

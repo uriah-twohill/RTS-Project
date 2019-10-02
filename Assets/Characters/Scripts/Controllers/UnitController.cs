@@ -24,16 +24,33 @@ public class UnitController : MonoBehaviour
     private void Update()
     {
         attackTimer += Time.deltaTime;
-        if(currentTarget != null)
+        if (currentTarget != null)
         {
             navAgent.destination = currentTarget.position;
 
             var distance = (transform.position - currentTarget.position).magnitude;
 
-            if(distance <= unitStats.attackRange)
+            if (distance <= unitStats.attackRange)
             {
                 Attack();
             }
+            else
+            {
+                runAnimation();
+            }
+        }
+        else if (gameObject.tag.Equals("playerUnit")) runAnimation();
+    }
+
+    void runAnimation()
+    {
+        if (navAgent.remainingDistance <= 2)
+        {
+            anim.SetInteger("Transition", 13);
+        }
+        if (navAgent.remainingDistance > 2)
+        {
+            anim.SetInteger("Transition", 1);
         }
     }
 
@@ -41,14 +58,6 @@ public class UnitController : MonoBehaviour
     {
         currentTarget = null;
         navAgent.destination = dest;
-        if (navAgent.hasPath == false)
-        {
-            anim.SetInteger("Transition", 13);
-        }
-        if (navAgent.hasPath == true)
-        {
-            anim.SetInteger("Transition", 1);
-        }
     }
 
     public void SetSelected(bool isSelected)
