@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 public class EnemyMovement : MonoBehaviour
 {
     GameObject[] heros;
     public NavMeshAgent agent;
     private Animator anim;
-    Health health;
     public GameObject herosWalls;
     float distance = float.MaxValue, attackRange= 10f;
     GameObject target = null;
     public bool inCombat = false;
-    
-
 
     private void Start()
     {
@@ -61,16 +59,28 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "playerUnit")
+        if (other.gameObject.tag == "playerUnit")
         {
             inCombat = true;
             Debug.Log("VillainAttacking");
             anim.SetInteger("Transition", 2);
+             findTarget();
+            RectTransform[] o = target.GetComponentsInChildren<RectTransform>();
+            for (int i = 0; i < o.Length; i++)
+            {
+                if (o[i].name.Equals("HealthBar"))
+                {
+                    target.GetComponent<UnitController>().setHealth(target.GetComponent<UnitController>().getHealth() - 0.1f);
+                    if (target.GetComponent<UnitController>().getHealth() <= 0) target.GetComponent<UnitController>().setHealth(0);
+                    o[i].transform.localScale = new Vector3(target.GetComponent<UnitController>().getHealth() / 100, o[i].transform.localScale.y, o[i].transform.localScale.z);
+                    break;
+                }
+            }
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "playerUnit")
+        if (other.gameObject.tag == "playerUnit")
         {
             inCombat = false;
         }

@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class UnitController : MonoBehaviour
 {
     private NavMeshAgent navAgent;
     private Transform currentTarget;
     private Animator anim;
-
-    private float attackTimer;
-
+    private float attackTimer, health;
     public UnitStats unitStats;
     
 
     public void Start()
     {
+        health = 100f;
         navAgent = GetComponent<NavMeshAgent>();
         attackTimer = unitStats.attackSpeed;
         anim = GetComponent<Animator>();
@@ -23,6 +23,7 @@ public class UnitController : MonoBehaviour
     }
     private void Update()
     {
+        Die();
         attackTimer += Time.deltaTime;
         if (currentTarget != null)
         {
@@ -75,8 +76,19 @@ public class UnitController : MonoBehaviour
         if (attackTimer >= unitStats.attackSpeed)
         {
             anim.SetInteger("Transition", 2);
-
-            RTSGameManager.UnitTakeDamage(this, currentTarget.GetComponent<UnitController>());
+            gameObject.transform.LookAt(currentTarget.transform.position);
+            //RTSGameManager.UnitTakeDamage(this, currentTarget.GetComponent<UnitController>());
+            RectTransform[] o = currentTarget.GetComponentsInChildren<RectTransform>();
+            for (int i = 0; i < o.Length; i++)
+            {
+                if (o[i].name.Equals("HealthBar"))
+                {
+                    currentTarget.GetComponent<UnitController>().setHealth(currentTarget.GetComponent<UnitController>().getHealth() - 10);
+                    if (currentTarget.GetComponent<UnitController>().getHealth() <= 0) currentTarget.GetComponent<UnitController>().setHealth(0);
+                    o[i].transform.localScale = new Vector3(currentTarget.GetComponent<UnitController>().getHealth() / 100, o[i].transform.localScale.y, o[i].transform.localScale.z);
+                    break;
+                }
+            }
             attackTimer = 0;
         }
         
@@ -104,6 +116,23 @@ public class UnitController : MonoBehaviour
         if(other.tag == "idleTrigger")
         {
             anim.SetInteger("Transition", 13);
+        }
+    }
+    public void setHealth(float nHealth)
+    {
+        health = nHealth;
+    }
+    public float getHealth()
+    {
+        return health;
+    }
+
+    public void Die()
+    {
+        if (health <= 0)
+        {
+            anim.SetInteger("Transition", 9);
+            SceneManager.LoadScene("GameOver");
         }
     }
 }
