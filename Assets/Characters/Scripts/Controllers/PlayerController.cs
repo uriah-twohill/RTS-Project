@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update()   
     {
         explosionOffset = (transform.TransformPoint(Vector3.forward * 5));
           if (agent.hasPath == false)
@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
             anim.SetInteger("Transition", 1);
         }
 
+        
+
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log(" Mouse Button Clicked");
@@ -56,7 +58,12 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 //             agent.SetDestination(hit.point);
-                               agent.destination = hit.point;
+                if(hit.collider.GetComponent<UnitController>() != null)
+                {
+                    if (hit.collider.GetComponent<UnitController>().getHealth() > 0) agent.destination = hit.point;
+                    else agent.SetDestination(GameObject.Find("Gatehouse (3)").transform.position);
+                }
+                else agent.destination = hit.point;
                 //             agent.transform.position = hit.point;
             }
         }

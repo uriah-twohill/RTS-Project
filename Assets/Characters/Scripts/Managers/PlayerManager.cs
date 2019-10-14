@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
     RaycastHit hit;
     List<UnitController> selectedUnits = new List<UnitController>();
-
+    int heroRespawns = 7, enemyRespawns = 7;
     bool isDragging = false;
     Vector3 mousePosition;
     //public Transform idleTrigger;
-
+    GameObject selected;
+    public GameObject ComebackTo;
 
     private void OnGUI()
     {
@@ -26,13 +29,20 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        selected = null;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(heroRespawns <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
+        if(enemyRespawns <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
         if (Input.GetMouseButtonDown(0))
         {
             mousePosition = Input.mousePosition;
@@ -52,6 +62,7 @@ public class PlayerManager : MonoBehaviour
                    
             }
         }
+
         if (Input.GetMouseButtonUp(0))
         {
             if (isDragging)
@@ -69,6 +80,7 @@ public class PlayerManager : MonoBehaviour
                 isDragging = false;
             }
         }
+
         if (Input.GetMouseButtonDown(1) && selectedUnits.Count > 0)
         {
             var camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -86,6 +98,7 @@ public class PlayerManager : MonoBehaviour
                 }
                 else if (hit.transform.CompareTag("EnemyUnit"))
                 {
+                    selected = hit.collider.gameObject;
                     foreach (var selectableObj in selectedUnits)
                     {
                         selectableObj.SetNewTarget(hit.transform);
@@ -128,5 +141,20 @@ public class PlayerManager : MonoBehaviour
         var camera = Camera.main;
         var viewportBounds = ScreenHelper.GetViewportBounds(camera, mousePosition, Input.mousePosition);
         return viewportBounds.Contains(camera.WorldToViewportPoint(transform.position));
+    }
+
+    public GameObject position()
+    {
+        return ComebackTo;
+    }
+
+    public void decreaseHeroRespawns() 
+    {
+        heroRespawns = heroRespawns - 1; 
+    }
+
+    public void decreaseEnemyRespawns()
+    {
+        enemyRespawns = enemyRespawns - 1;
     }
 }

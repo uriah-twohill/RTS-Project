@@ -11,7 +11,6 @@ public class UnitController : MonoBehaviour
     private Animator anim;
     private float attackTimer, health;
     public UnitStats unitStats;
-    
 
     public void Start()
     {
@@ -27,17 +26,24 @@ public class UnitController : MonoBehaviour
         attackTimer += Time.deltaTime;
         if (currentTarget != null)
         {
-            navAgent.destination = currentTarget.position;
-
-            var distance = (transform.position - currentTarget.position).magnitude;
-
-            if (distance <= unitStats.attackRange)
+            if (currentTarget.GetComponent<UnitController>() != null)
             {
-                Attack();
-            }
-            else
-            {
-                runAnimation();
+                if (currentTarget.GetComponent<UnitController>().getHealth() > 0)
+                {
+                    navAgent.destination = currentTarget.position;
+
+                    var distance = (transform.position - currentTarget.position).magnitude;
+
+                    if (distance <= unitStats.attackRange)
+                    {
+                        Attack();
+                    }
+                    else
+                    {
+                        runAnimation();
+                    }
+                }
+                else currentTarget = null;
             }
         }
         else if (gameObject.tag.Equals("playerUnit")) runAnimation();
@@ -132,7 +138,7 @@ public class UnitController : MonoBehaviour
         if (health <= 0)
         {
             anim.SetInteger("Transition", 9);
-            SceneManager.LoadScene("GameOver");
+          //  SceneManager.LoadScene("GameOver");
         }
     }
 }

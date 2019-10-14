@@ -10,6 +10,7 @@ TagManager:
   - idleTrigger
   - idleTriggerVillain
   - Dessert
+  - PauseScene
   layers:
   - Default
   - TransparentFX

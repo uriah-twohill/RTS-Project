@@ -15,7 +15,6 @@ public class EnemySight : MonoBehaviour
     private LastPlayerSighting lastPlayerSighting;
     public GameObject playerUnit;
     private Animator playerAnim;
-    private Health health;
     private HashIDs hash;
     private Vector3 previousSighting;
 
@@ -25,18 +24,13 @@ public class EnemySight : MonoBehaviour
         anim = GetComponent<Animator>();
         lastPlayerSighting = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<LastPlayerSighting>();
         playerAnim = playerUnit.GetComponent<Animator>();
-        health = playerUnit.GetComponent< Health >();
         hash = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<HashIDs>();
 
         personalLastSighting = lastPlayerSighting.resetPosition;
         previousSighting = lastPlayerSighting.resetPosition;
 
         previousSighting = lastPlayerSighting.position;
-
-        if (health.currentHealth > 0f)
-            anim.SetBool(hash.playerInSightBool, playerInSight);
-        else
-            anim.SetBool(hash.playerInSightBool, false);
+     
     }
 
     private void OnTriggerStay(Collider other)
